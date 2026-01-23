@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import QuickActions from './components/QuickActions'
+import FAQSection from './components/FAQSection'
 
 function App() {
     return (
@@ -9,6 +10,7 @@ function App() {
             <main>
                 <Hero />
                 <QuickActions />
+                <FAQSection />
             </main>
         </div>
     )
