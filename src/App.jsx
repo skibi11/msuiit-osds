@@ -10,7 +10,9 @@ function App() {
             <main>
                 <Hero />
                 <QuickActions />
-                <FAQSection />
+                <div className="mt-12">
+                    <FAQSection />
+                </div>
             </main>
         </div>
     )
