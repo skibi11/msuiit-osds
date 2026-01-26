@@ -5,7 +5,7 @@ import useGoogleSheet from '../hooks/useGoogleSheet'
 
 export default function CategoryPage() {
     const { slug } = useParams()
-    const { data: formsData, loading } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQf-J8g6x-gO6tKx1yX6qK7jXy8x9z0A1B2C3D4E5F6G7H8I9J0K/pub?output=csv')
+    const { data: formsData, loading, error } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6690GqobcQRr7x9wGxxA0HQEbDwtx83so1LkbZzgYJ8sVIeRuEHK3beBkM5d4vweBC4MePCH6U_X9/pub?gid=0&single=true&output=csv')
 
     // Format the category name for display (e.g. "in-campus" -> "In-Campus")
     const categoryName = slug
@@ -19,6 +19,14 @@ export default function CategoryPage() {
         return (
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
                 <p className="text-gray-500 text-xl">Loading forms...</p>
+            </div>
+        )
+    }
+
+    if (error) {
+        return (
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+                <p className="text-red-500 text-xl">Error: {error.message || 'Failed to load forms'}</p>
             </div>
         )
     }
