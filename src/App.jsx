@@ -1,20 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import QuickActions from './components/QuickActions'
-import FAQSection from './components/FAQSection'
+import Home from './pages/Home'
+import CategoryPage from './pages/CategoryPage'
 
 function App() {
     return (
-        <div className="min-h-screen bg-background text-text font-sans">
-            <Navbar />
-            <main>
-                <Hero />
-                <QuickActions />
-                <div className="mt-12">
-                    <FAQSection />
-                </div>
-            </main>
-        </div>
+        <BrowserRouter>
+            <div className="min-h-screen bg-background text-text font-sans">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/category/:slug" element={<CategoryPage />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
     )
 }
 
