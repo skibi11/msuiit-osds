@@ -31,9 +31,11 @@ export default function CategoryPage() {
                             </p>
                             <a
                                 href={form.downloadLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors w-full sm:w-auto"
                             >
-                                Download
+                                View Form
                             </a>
                         </div>
                     ))}
