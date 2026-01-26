@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { formsData } from '../data/formsData'
+import useGoogleSheet from '../hooks/useGoogleSheet'
+// import { formsData } from '../data/formsData'
 
 export default function Hero() {
+    const { data: formsData } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQf-J8g6x-gO6tKx1yX6qK7jXy8x9z0A1B2C3D4E5F6G7H8I9J0K/pub?output=csv')
     const [searchTerm, setSearchTerm] = useState('')
     const [searchResults, setSearchResults] = useState([])
 
@@ -14,10 +16,10 @@ export default function Hero() {
             return
         }
 
-        const results = formsData.filter(form =>
+        const results = formsData ? formsData.filter(form =>
             form.title.toLowerCase().includes(term.toLowerCase()) ||
-            form.keywords.some(keyword => keyword.toLowerCase().includes(term.toLowerCase()))
-        )
+            form.keywords.split(',').some(keyword => keyword.trim().toLowerCase().includes(term.toLowerCase()))
+        ) : []
         setSearchResults(results)
     }
 

@@ -1,17 +1,27 @@
 
 import { useParams } from 'react-router-dom'
-import { formsData } from '../data/formsData'
+import useGoogleSheet from '../hooks/useGoogleSheet'
+// import { formsData } from '../data/formsData'
 
 export default function CategoryPage() {
     const { slug } = useParams()
-
-    // Filter forms based on the category slug
-    const forms = formsData.filter(form => form.category === slug)
+    const { data: formsData, loading } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQf-J8g6x-gO6tKx1yX6qK7jXy8x9z0A1B2C3D4E5F6G7H8I9J0K/pub?output=csv')
 
     // Format the category name for display (e.g. "in-campus" -> "In-Campus")
     const categoryName = slug
         ? slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
         : 'Category'
+
+    // Filter forms based on the category slug
+    const forms = formsData ? formsData.filter(form => form.category === slug) : []
+
+    if (loading) {
+        return (
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+                <p className="text-gray-500 text-xl">Loading forms...</p>
+            </div>
+        )
+    }
 
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
