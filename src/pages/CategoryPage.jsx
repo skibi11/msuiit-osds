@@ -7,12 +7,16 @@ import useGoogleSheet from '../hooks/useGoogleSheet'
 // Helper to convert Google Drive share link to direct image link
 const getDirectImageLink = (url) => {
     if (!url) return null;
-    // REGEX: Looks for the ID between /d/ and /view or /edit
-    const idMatch = url.match(/\/d\/(.+?)(\/|$)/);
+
+    // 1. Try to find the ID (matches both /d/ID and id=ID formats)
+    const idMatch = url.match(/\/d\/(.+?)(\/|$)/) || url.match(/id=(.+?)($|&)/);
+
     if (idMatch && idMatch[1]) {
-        return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+        // 2. Return the Thumbnail URL (sz=w1000 requests a high-res width of 1000px)
+        return `https://drive.google.com/thumbnail?sz=w1000&id=${idMatch[1]}`;
     }
-    return url; // Return original if regex fails
+
+    return url; // Fallback
 };
 
 export default function CategoryPage() {
