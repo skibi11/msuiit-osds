@@ -35,7 +35,7 @@ export default function AllForms() {
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {uniqueForms.map((form) => (
                         <div key={form.id} className="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-6 hover:shadow-md transition-shadow">
-                            <h2 className="text-xl font-semibold text-primary mb-2">
+                            <h2 className="text-lg font-bold mb-2 leading-tight text-primary">
                                 {form.title}
                             </h2>
                             <p className="text-sm text-gray-500 mb-4 h-12 overflow-hidden">
