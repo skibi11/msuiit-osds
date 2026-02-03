@@ -20,15 +20,20 @@ export default function AllForms() {
         )
     }
 
+    // Deduplicate forms based on title to handle multiple category assignments
+    const uniqueForms = formsData
+        ? Array.from(new Map(formsData.map(item => [item.title, item])).values())
+        : []
+
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
             <h1 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">
                 All Downloadable Forms
             </h1>
 
-            {formsData && formsData.length > 0 ? (
+            {uniqueForms && uniqueForms.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {formsData.map((form) => (
+                    {uniqueForms.map((form) => (
                         <div key={form.id} className="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-6 hover:shadow-md transition-shadow">
                             <h2 className="text-xl font-semibold text-primary mb-2">
                                 {form.title}
