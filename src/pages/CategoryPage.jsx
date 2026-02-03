@@ -3,6 +3,17 @@ import { useParams } from 'react-router-dom'
 import useGoogleSheet from '../hooks/useGoogleSheet'
 // import { formsData } from '../data/formsData'
 
+// Helper to convert Google Drive share link to direct image link
+const getDirectImageLink = (link) => {
+    if (!link) return null;
+    const driveRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const match = link.match(driveRegex);
+    if (match && match[1]) {
+        return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    }
+    return link;
+}
+
 export default function CategoryPage() {
     const { slug } = useParams()
     const { data: formsData, loading, error } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6690GqobcQRr7x9wGxxA0HQEbDwtx83so1LkbZzgYJ8sVIeRuEHK3beBkM5d4vweBC4MePCH6U_X9/pub?gid=0&single=true&output=csv')
@@ -14,6 +25,10 @@ export default function CategoryPage() {
 
     // Filter forms based on the category slug
     const forms = formsData ? formsData.filter(form => form.category === slug) : []
+
+    // Find the first form with a flowchart link in this category
+    const flowchartUrl = forms.find(form => form.flowchart_link)?.flowchart_link
+    const directFlowchartUrl = getDirectImageLink(flowchartUrl)
 
     if (loading) {
         return (
@@ -36,6 +51,14 @@ export default function CategoryPage() {
             <h1 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">
                 {categoryName}
             </h1>
+
+            {directFlowchartUrl && (
+                <img
+                    src={directFlowchartUrl}
+                    alt={`${categoryName} Flowchart`}
+                    className="w-full max-w-4xl mx-auto mb-8 rounded shadow-lg border border-gray-200"
+                />
+            )}
 
             {forms.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
