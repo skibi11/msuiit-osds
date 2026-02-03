@@ -4,15 +4,16 @@ import useGoogleSheet from '../hooks/useGoogleSheet'
 // import { formsData } from '../data/formsData'
 
 // Helper to convert Google Drive share link to direct image link
-const getDirectImageLink = (link) => {
-    if (!link) return null;
-    const driveRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
-    const match = link.match(driveRegex);
-    if (match && match[1]) {
-        return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+// Helper to convert Google Drive share link to direct image link
+const getDirectImageLink = (url) => {
+    if (!url) return null;
+    // REGEX: Looks for the ID between /d/ and /view or /edit
+    const idMatch = url.match(/\/d\/(.+?)(\/|$)/);
+    if (idMatch && idMatch[1]) {
+        return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
     }
-    return link;
-}
+    return url; // Return original if regex fails
+};
 
 export default function CategoryPage() {
     const { slug } = useParams()
@@ -28,6 +29,7 @@ export default function CategoryPage() {
 
     // Find the first form with a flowchart link in this category
     const flowchartUrl = forms.find(form => form.flowchart_link)?.flowchart_link
+    console.log("Processing Flowchart URL:", flowchartUrl)
     const directFlowchartUrl = getDirectImageLink(flowchartUrl)
 
     if (loading) {
