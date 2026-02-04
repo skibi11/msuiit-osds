@@ -29,7 +29,7 @@ export default function CategoryPage() {
         : 'Category'
 
     // Filter forms based on the category slug
-    const forms = formsData ? formsData.filter(form => form.category === slug) : []
+    const forms = formsData ? formsData.filter(form => form.category === slug && form.category !== 'footer_social') : []
 
     // Find the first form with a flowchart link in this category
     const flowchartUrl = forms.find(form => form.flowchart_link)?.flowchart_link

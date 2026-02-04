@@ -3,7 +3,9 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import CategoryPage from './pages/CategoryPage'
 import AllForms from './pages/AllForms'
+
 import Policies from './pages/Policies'
+import Footer from './components/Footer'
 
 function App() {
     return (
@@ -16,6 +18,7 @@ function App() {
                     <Route path="/policies" element={<Policies />} />
                     <Route path="/category/:slug" element={<CategoryPage />} />
                 </Routes>
+                <Footer />
             </div>
         </BrowserRouter>
     )

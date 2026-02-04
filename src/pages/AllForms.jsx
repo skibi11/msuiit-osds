@@ -22,7 +22,11 @@ export default function AllForms() {
 
     // Deduplicate forms based on title to handle multiple category assignments
     const uniqueForms = formsData
-        ? Array.from(new Map(formsData.map(item => [item.title, item])).values())
+        ? Array.from(new Map(
+            formsData
+                .filter(item => item.category !== 'footer_social')
+                .map(item => [item.title, item])
+        ).values())
         : []
 
     return (
