@@ -57,7 +57,7 @@ export default function Hero() {
                                 </ul>
                             ) : (
                                 <div className="px-4 py-6 text-sm text-gray-500 text-center">
-                                    Can't find it? Try looking in the <span className="font-medium text-primary cursor-pointer">Scholarships</span> tab.
+                                    Can't find it? Try looking in the <span className="font-medium text-primary cursor-pointer">Programs and Services</span> tab.
                                 </div>
                             )}
                         </div>

@@ -2,7 +2,7 @@ const actions = [
     { title: 'On-Campus Activity', description: 'Permits and venue reservations', path: '/category/on-campus' },
     { title: 'Off-Campus Activity', description: 'Travel orders and risk management', path: '/category/off-campus' },
     { title: 'Organizations', description: 'Accreditation and renewal', path: '/category/organizations' },
-    { title: 'Scholarships', description: 'Application and requirements', path: '/category/scholarships' },
+    { title: 'Programs and Services', description: 'Scholarships, assistantships & grants', path: '/category/programs-and-services' },
 ]
 
 import { Link } from 'react-router-dom'

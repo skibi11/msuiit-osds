@@ -95,8 +95,8 @@ export default function CategoryPage() {
                             key={option}
                             onClick={() => setActiveFilter(option)}
                             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 ${activeFilter === option
-                                    ? 'bg-primary text-white shadow-sm'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-primary text-white shadow-sm'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                         >
                             {option}
@@ -105,7 +105,127 @@ export default function CategoryPage() {
                 </div>
             )}
 
-            {filteredForms.length > 0 ? (
+            {/* Static Programs and Services UI */}
+            {slug === 'programs-and-services' ? (
+                <div className="max-w-4xl mx-auto space-y-12 pb-12 pt-6">
+
+                    {/* Section 1: Scholarship Programs */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-primary mb-4 border-b border-gray-200 pb-2">
+                            Scholarship Programs
+                        </h2>
+                        <div className="text-gray-700 space-y-4 leading-relaxed">
+                            <p>
+                                The OSDS is committed to ensuring equitable access to education through various scholarship programs and financial assistance. These programs are designed to provide essential support to deserving students across the Institute, subject to specific academic requirements such as maintaining a passing grade in all subjects or meeting a designated GPA threshold.
+                            </p>
+                            <div className="mt-6 overflow-x-auto border border-gray-200 rounded-lg">
+                                <table className="min-w-full text-sm text-left text-gray-700">
+                                    <thead className="bg-amber-50 text-xs uppercase tracking-wider">
+                                        <tr>
+                                            <th className="px-4 py-3 font-semibold text-primary">Form of Scholarship / Grant</th>
+                                            <th className="px-4 py-3 font-semibold text-primary">GPA Range</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {[
+                                            ['Special Grant — Dance', '2.75 or better'],
+                                            ['Special Grant — Theater', '2.75 or better'],
+                                            ['Special Grant — Choral', '2.75 or better'],
+                                            ['Special Grant — Band', '2.75 or better'],
+                                            ['Student Assistantship', 'Passing in all subjects'],
+                                            ['Office Assistantship', 'Passing in all subjects'],
+                                            ['Teaching Assistantship', 'Passing in all subjects'],
+                                        ].map(([program, gpa], i) => (
+                                            <tr key={program} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                                                <td className="px-4 py-3">{program}</td>
+                                                <td className="px-4 py-3 font-medium text-gray-900">{gpa}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Section 2: Student Assistantship */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-primary mb-4 border-b border-gray-200 pb-2">
+                            Student Assistantship
+                        </h2>
+                        <div className="text-gray-700 space-y-4 leading-relaxed">
+                            <p>
+                                This program provides student employment opportunities, allowing poor but deserving students to earn their way through college and finish a degree by rendering service to the Institute.
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1 mt-2">
+                                <li><strong>Compensation:</strong> Allowed to work a maximum of 120 hours per month at a rate of ₱30.00 per hour (maximum of ₱3,600/month).</li>
+                                <li><strong>Requirements:</strong> Must carry a minimum academic load of twelve (12) units, have no failing grades in the immediately preceding semester, and have no record of misconduct.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    {/* Section 3: Office Assistantship */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-primary mb-4 border-b border-gray-200 pb-2">
+                            Office Assistantship
+                        </h2>
+                        <div className="text-gray-700 space-y-4 leading-relaxed">
+                            <p>
+                                Operating under the student employment mandate, this program provides specialized administrative and office support across various colleges and units. It is specifically designed for junior or graduating students who possess specific technical skills, such as computer operation.
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1 mt-2">
+                                <li><strong>Requirements:</strong> Must carry a minimum academic load of twelve (12) units, have no failing grades, and have no record of misconduct.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    {/* Section 4: Teaching Assistantship */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-primary mb-4 border-b border-gray-200 pb-2">
+                            Teaching Assistantship
+                        </h2>
+                        <div className="text-gray-700 space-y-4 leading-relaxed">
+                            <p>
+                                This program allows qualified junior or graduating students to assist instructors and professors in managing large classes. Duties typically include checking attendance, recording scores, and proctoring examinations.
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1 mt-2">
+                                <li><strong>Compensation:</strong> Compensated at ₱30.00 per hour, not exceeding 120 hours per month.</li>
+                                <li><strong>Requirements:</strong> Must pass all subjects to maintain the grant and remain in good academic standing.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    {/* Section 5: Special Grants */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-primary mb-4 border-b border-gray-200 pb-2">
+                            Special Grants
+                        </h2>
+                        <div className="text-gray-700 space-y-4 leading-relaxed">
+                            <p>
+                                The office provides financial assistance, training, and competition support to resident cultural groups and special grantees. Supported organizations include the Bugle Band, Echoes Band, MSU-IIT Debate Varsity, Integrated Performing Arts Guild (IPAG), Kalilang Traditional Music Ensemble, KALIMULAN, OCTAVA Choral Society, and Varsity Athletes.
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1 mt-2">
+                                <li><strong>Benefits:</strong> Grantees receive a monthly allowance of ₱500.00 and are exempted from the payment of upgraded tuition, retail laboratory, and special laboratory fees.</li>
+                                <li><strong>Requirements:</strong> Must maintain a minimum academic load of twelve (12) units and a GPA of 2.75 or better.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    {/* Section 6: On Student Publication */}
+                    <section>
+                        <h2 className="text-2xl font-bold text-primary mb-4 border-b border-gray-200 pb-2">
+                            On Student Publication
+                        </h2>
+                        <div className="text-gray-700 space-y-4 leading-relaxed">
+                            <p>
+                                The OSDS formally supervises and assists the Official Student Publication, <em>Silahis</em>. Administrative support includes the preparation of the publication's Work and Financial Plan, Project Procurement Management Plan, and necessary travel documents to ensure their continued operation and successful press releases.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+
+
+            ) : filteredForms.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {filteredForms.map((form) => (
                         <div key={form.id} className="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-6 hover:shadow-md transition-shadow">
