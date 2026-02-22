@@ -57,56 +57,13 @@ export default function CategoryPage() {
 
     const filterOptions = ["All", "KASAMA", "Student Councils", "Societies"];
 
-    if (loading) {
+    // Programs and Services is fully static — return immediately, no data needed
+    if (slug === 'programs-and-services') {
         return (
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
-                <p className="text-gray-500 text-xl">Loading forms...</p>
-            </div>
-        )
-    }
-
-    if (error) {
-        return (
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
-                <p className="text-red-500 text-xl">Error: {error.message || 'Failed to load forms'}</p>
-            </div>
-        )
-    }
-
-    return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">
-                {categoryName}
-            </h1>
-
-            {directFlowchartUrl && (
-                <img
-                    src={directFlowchartUrl}
-                    alt={`${categoryName} Flowchart`}
-                    className="w-full max-w-4xl mx-auto mb-8 rounded shadow-lg border border-gray-200"
-                />
-            )}
-
-            {/* Filter Buttons - Only for Organizations */}
-            {slug === 'organizations' && (
-                <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
-                    {filterOptions.map((option) => (
-                        <button
-                            key={option}
-                            onClick={() => setActiveFilter(option)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 ${activeFilter === option
-                                ? 'bg-primary text-white shadow-sm'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                }`}
-                        >
-                            {option}
-                        </button>
-                    ))}
-                </div>
-            )}
-
-            {/* Static Programs and Services UI */}
-            {slug === 'programs-and-services' ? (
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+                <h1 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">
+                    {categoryName}
+                </h1>
                 <div className="max-w-4xl mx-auto space-y-12 pb-12 pt-6">
 
                     {/* Section 1: Scholarship Programs */}
@@ -223,9 +180,59 @@ export default function CategoryPage() {
                     </section>
 
                 </div>
+            </div>
+        )
+    }
 
+    if (loading) {
+        return (
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+                <p className="text-gray-500 text-xl">Loading forms...</p>
+            </div>
+        )
+    }
 
-            ) : filteredForms.length > 0 ? (
+    if (error) {
+        return (
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 text-center">
+                <p className="text-red-500 text-xl">Error: {error.message || 'Failed to load forms'}</p>
+            </div>
+        )
+    }
+
+    return (
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+            <h1 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">
+                {categoryName}
+            </h1>
+
+            {directFlowchartUrl && (
+                <img
+                    src={directFlowchartUrl}
+                    alt={`${categoryName} Flowchart`}
+                    className="w-full max-w-4xl mx-auto mb-8 rounded shadow-lg border border-gray-200"
+                />
+            )}
+
+            {/* Filter Buttons - Only for Organizations */}
+            {slug === 'organizations' && (
+                <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
+                    {filterOptions.map((option) => (
+                        <button
+                            key={option}
+                            onClick={() => setActiveFilter(option)}
+                            className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors duration-200 ${activeFilter === option
+                                ? 'bg-primary text-white shadow-sm'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                        >
+                            {option}
+                        </button>
+                    ))}
+                </div>
+            )}
+
+            {filteredForms.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {filteredForms.map((form) => (
                         <div key={form.id} className="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-6 hover:shadow-md transition-shadow">
