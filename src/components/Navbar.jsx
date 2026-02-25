@@ -13,6 +13,7 @@ export default function Navbar() {
                 </Link>
                 <div className="hidden md:flex space-x-8">
                     <Link to="/" className="text-sm font-medium text-text hover:text-primary transition-colors">Home</Link>
+                    <Link to="/about" className="text-sm font-medium text-text hover:text-primary transition-colors">About</Link>
                     <Link to="/forms" className="text-sm font-medium text-text hover:text-primary transition-colors">Forms</Link>
                     <Link to="/policies" className="text-sm font-medium text-text hover:text-primary transition-colors">Policies</Link>
                 </div>

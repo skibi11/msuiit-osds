@@ -53,6 +53,7 @@ export default function Footer() {
                         <h4 className="font-bold text-gray-900 mb-3 text-base">Quick Links</h4>
                         <ul className="grid grid-cols-[auto_auto] gap-x-5 gap-y-2 w-fit text-sm text-gray-600">
                             <li><a href="/" className="hover:text-primary transition-colors">Home</a></li>
+                            <li><a href="/about" className="hover:text-primary transition-colors">About</a></li>
                             <li><a href="/forms" className="hover:text-primary transition-colors">Forms</a></li>
                             <li><a href="/policies" className="hover:text-primary transition-colors">Policies</a></li>
                             <li><a href="https://www.facebook.com/MSUIITPHOSDS" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">OSDS Facebook Page</a></li>

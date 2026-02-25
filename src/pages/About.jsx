@@ -1,0 +1,179 @@
+import { useState } from 'react'
+
+export default function About() {
+    const [activeTab, setActiveTab] = useState('overview')
+
+    const tabs = [
+        { id: 'overview', label: 'Overview' },
+        { id: 'staff', label: 'Staff and Directory' },
+        { id: 'structure', label: 'Organizational Structure' },
+    ]
+
+    return (
+        <div className="max-w-6xl mx-auto px-4 pt-6 pb-12">
+
+            {/* Page Header */}
+            <div className="text-center space-y-2 mb-8">
+                <h1 className="text-3xl font-extrabold text-[#8a1538] tracking-tight">About OSDS</h1>
+                <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                    Discover the history, mandate, and vision of the Office of Student Development Services.
+                </p>
+
+                {/* Tab Navigation */}
+                <div className="flex flex-wrap justify-center gap-2 mt-5 border-b border-gray-200 pb-4">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`px-5 py-1.5 rounded-full text-sm font-medium transition-colors ${activeTab === tab.id
+                                ? 'bg-[#8a1538] text-white shadow-md'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* Overview Tab */}
+            {activeTab === 'overview' && (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+
+                    {/* Left Column — Main Content */}
+                    <div className="lg:col-span-2 space-y-12">
+
+                        {/* History Block */}
+                        <div className="bg-gray-50 p-8 rounded-2xl border-l-4 border-[#8a1538]">
+                            <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">History and Rationale</h2>
+                            <p className="text-gray-700 leading-relaxed text-lg">
+                                The Department of Student Affairs (DSA) has been handling numerous programs and
+                                activities to enhance student welfare at the Mindanao State University-Iligan
+                                Institute of Technology (MSU-IIT) since 1968. To address the growing needs of the
+                                student body, the office was officially renamed the Office of Student Development
+                                Services (OSDS) and placed under the Office of the Vice Chancellor for Student
+                                Services (OVCSS) through Board Resolution Number 50, Series of 2019.
+                            </p>
+                        </div>
+
+                        {/* Vision & Mandate Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 border-t-4 border-t-yellow-500 hover:shadow-lg transition-shadow">
+                                <h2 className="text-2xl font-bold text-[#8a1538] mb-4">Our Vision</h2>
+                                <p className="text-gray-600 leading-relaxed">
+                                    To provide our students with excellent services and be recognized in the support
+                                    of quality, prompt, convenient, and effective channels of communication between
+                                    the student body and the administration.
+                                </p>
+                            </div>
+
+                            <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-200 border-t-4 border-t-[#8a1538] hover:shadow-lg transition-shadow">
+                                <h2 className="text-2xl font-bold text-[#8a1538] mb-4">Our Mandate</h2>
+                                <p className="text-gray-600 leading-relaxed">
+                                    The OSDS exercises general supervision over overall student activities to ensure
+                                    holistic development. Our primary concern is to protect and enhance student
+                                    welfare by initiating and supervising meaningful programs that supplement
+                                    academic training.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column — Director Sidebar */}
+                    <div className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
+                        <div className="p-6 text-center">
+                            <img
+                                src="/images/director.jpg"
+                                alt="Assoc. Prof. Phyllis Marie Teanco"
+                                className="w-full h-80 object-cover object-top rounded-xl mb-6 border-4 border-white shadow-md ring-1 ring-gray-200"
+                            />
+                            <h3 className="text-xl font-bold text-[#1a1a1a] leading-tight">
+                                Assoc. Prof. Phyllis Marie Teanco
+                            </h3>
+                            <p className="text-[#8a1538] font-medium mt-1">Director, OSDS</p>
+
+                            <div className="mt-6 pt-6 border-t border-gray-100 text-left text-sm text-gray-600 space-y-2">
+                                <h4 className="font-bold text-[#1a1a1a] mb-3">Contact Us</h4>
+                                <p>Telephone: +63 221-2179</p>
+                                <p>Email: osds@g.msuiit.edu.ph</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            )}
+
+            {/* Staff and Directory Tab */}
+            {activeTab === 'staff' && (
+                <div className="py-12 text-center text-gray-500">
+                    Staff and Directory content coming soon.
+                </div>
+            )}
+
+            {activeTab === 'structure' && (
+                <div className="max-w-6xl mx-auto py-6 flex flex-col items-center">
+
+                    <div className="w-full flex flex-col items-center">
+
+                        {/* Level 1: Director */}
+                        <div className="bg-white border-t-4 border-[#8a1538] shadow-md rounded-xl p-6 w-full max-w-sm text-center z-10">
+                            <h3 className="text-xl font-bold text-[#1a1a1a]">OSDS Director</h3>
+                            <p className="text-sm text-[#8a1538] font-medium mt-1">(Designation)</p>
+                        </div>
+
+                        {/* Vertical drop from Director */}
+                        <div className="hidden md:block w-0.5 h-8 bg-gray-300"></div>
+
+                        {/* Horizontal spanning connector with 4 drop lines */}
+                        <div className="hidden md:block w-[75%] border-t-2 border-gray-300 relative h-8 mx-auto">
+                            <div className="absolute top-0 left-0 w-0.5 h-8 bg-gray-300 -ml-px"></div>
+                            <div className="absolute top-0 left-[33.33%] w-0.5 h-8 bg-gray-300 -ml-px"></div>
+                            <div className="absolute top-0 left-[66.67%] w-0.5 h-8 bg-gray-300 -ml-px"></div>
+                            <div className="absolute top-0 right-0 w-0.5 h-8 bg-gray-300 -mr-px"></div>
+                        </div>
+
+                        {/* Level 2: Coordinators & Assistants */}
+                        <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-4 md:mt-0 z-10">
+                            {[
+                                { title: 'Administrative Assistant VI', role: 'Financial Assistant' },
+                                { title: 'Administrative Assistant IV', role: 'Program Coordinator' },
+                                { title: 'Administrative Assistant II', role: 'Organizations Coordinator' },
+                                { title: 'Administrative Assistant II', role: 'Secretary' },
+                            ].map((item, i) => (
+                                <div key={i} className="bg-white border border-gray-200 border-t-4 border-t-yellow-500 shadow-md rounded-xl p-5 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                                    <h3 className="font-bold text-gray-800 text-sm">{item.title}</h3>
+                                    <p className="text-xs text-gray-500 mt-2 bg-gray-50 py-1 px-2 rounded-md inline-block">({item.role})</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Level 3: Aides */}
+                        <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-12">
+                            <div className="bg-gray-50 border border-gray-200 border-l-4 border-l-gray-400 shadow-sm rounded-r-xl rounded-l-sm p-5 text-center hover:shadow-md transition-shadow">
+                                <h3 className="font-bold text-gray-700 text-sm">Administrative Aide VI</h3>
+                                <p className="text-xs text-gray-500 mt-1">(Clerk III)</p>
+                            </div>
+                            <div className="bg-gray-50 border border-gray-200 border-l-4 border-l-gray-400 shadow-sm rounded-r-xl rounded-l-sm p-5 text-center hover:shadow-md transition-shadow">
+                                <h3 className="font-bold text-gray-700 text-sm">Administrative Aide IV</h3>
+                                <p className="text-xs text-gray-500 mt-1">(Liaison)</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Narrative — moved to bottom */}
+                    <div className="text-center mt-16 max-w-3xl mx-auto border-t border-gray-200 pt-10">
+                        <p className="text-gray-600 leading-relaxed text-lg">
+                            The Office of Student Development Services (OSDS) is systematically organized to effectively
+                            execute its mandate of protecting and enhancing student welfare. This framework ensures
+                            dedicated support for financial assistance, program coordination, student organizations,
+                            and essential administrative operations.
+                        </p>
+                    </div>
+
+                </div>
+            )}
+
+        </div>
+    )
+}
