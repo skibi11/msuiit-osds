@@ -116,7 +116,7 @@ export default function About() {
                     <div className="w-full flex flex-col items-center">
 
                         {/* Level 1: Director */}
-                        <div className="bg-white border-t-4 border-[#8a1538] shadow-md rounded-xl p-6 w-full max-w-sm text-center z-10">
+                        <div className="bg-white border-t-4 border-[#8a1538] shadow-md rounded-xl p-6 w-full max-w-sm text-center z-10 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                             <h3 className="text-xl font-bold text-[#1a1a1a]">OSDS Director</h3>
                             <p className="text-sm text-[#8a1538] font-medium mt-1">(Designation)</p>
                         </div>
@@ -149,11 +149,11 @@ export default function About() {
 
                         {/* Level 3: Aides */}
                         <div className="w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-12">
-                            <div className="bg-gray-50 border border-gray-200 border-l-4 border-l-gray-400 shadow-sm rounded-r-xl rounded-l-sm p-5 text-center hover:shadow-md transition-shadow">
+                            <div className="bg-gray-50 border border-gray-200 border-l-4 border-l-gray-400 shadow-sm rounded-r-xl rounded-l-sm p-5 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                                 <h3 className="font-bold text-gray-700 text-sm">Administrative Aide VI</h3>
                                 <p className="text-xs text-gray-500 mt-1">(Clerk III)</p>
                             </div>
-                            <div className="bg-gray-50 border border-gray-200 border-l-4 border-l-gray-400 shadow-sm rounded-r-xl rounded-l-sm p-5 text-center hover:shadow-md transition-shadow">
+                            <div className="bg-gray-50 border border-gray-200 border-l-4 border-l-gray-400 shadow-sm rounded-r-xl rounded-l-sm p-5 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
                                 <h3 className="font-bold text-gray-700 text-sm">Administrative Aide IV</h3>
                                 <p className="text-xs text-gray-500 mt-1">(Liaison)</p>
                             </div>
