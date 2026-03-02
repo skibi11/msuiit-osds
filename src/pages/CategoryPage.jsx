@@ -3,24 +3,10 @@ import { useParams } from 'react-router-dom'
 import useGoogleSheet from '../hooks/useGoogleSheet'
 // import { formsData } from '../data/formsData'
 
-// Helper to convert Google Drive share link to direct image link
-const getDirectImageLink = (url) => {
-    if (!url) return null;
-
-    // 1. Try to find the ID (matches both /d/ID and id=ID formats)
-    const idMatch = url.match(/\/d\/(.+?)(\/|$)/) || url.match(/id=(.+?)($|&)/);
-
-    if (idMatch && idMatch[1]) {
-        // 2. Return the Thumbnail URL (sz=w1000 requests a high-res width of 1000px)
-        return `https://drive.google.com/thumbnail?sz=w1000&id=${idMatch[1]}`;
-    }
-
-    return url; // Fallback
-};
 
 export default function CategoryPage() {
     const { slug } = useParams()
-    const { data: formsData, loading, error } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6690GqobcQRr7x9wGxxA0HQEbDwtx83so1LkbZzgYJ8sVIeRuEHK3beBkM5d4vweBC4MePCH6U_X9/pub?gid=0&single=true&output=csv')
+    const { formsData, flowchartsData, loading, error } = useGoogleSheet()
     const [activeFilter, setActiveFilter] = useState("All")
 
     // Format the category name for display (e.g. "in-campus" -> "In-Campus")
@@ -29,7 +15,7 @@ export default function CategoryPage() {
         : 'Category'
 
     // Filter forms based on the category slug
-    const forms = formsData ? formsData.filter(form => form.category === slug && form.category !== 'footer_social') : []
+    const forms = formsData ? formsData.filter(form => form.category === slug) : []
 
     // Filter logic for Organizations page
     const filteredForms = forms.filter(form => {
@@ -50,10 +36,8 @@ export default function CategoryPage() {
         return true;
     });
 
-    // Find the first form with a flowchart link in this category
-    const flowchartUrl = forms.find(form => form.flowchart_link)?.flowchart_link
-    console.log("Processing Flowchart URL:", flowchartUrl)
-    const directFlowchartUrl = getDirectImageLink(flowchartUrl)
+    // Find the flowchart for the current category from the Flowcharts tab
+    const flowchart = flowchartsData.find(fc => fc.category === slug && fc.imageSrc)
 
     const filterOptions = ["All", "KASAMA", "Student Councils", "Societies"];
 
@@ -206,11 +190,11 @@ export default function CategoryPage() {
                 {categoryName}
             </h1>
 
-            {directFlowchartUrl && (
+            {flowchart && (
                 <img
-                    src={directFlowchartUrl}
-                    alt={`${categoryName} Flowchart`}
-                    className="w-full max-w-4xl mx-auto mb-8 rounded shadow-lg border border-gray-200"
+                    src={flowchart.imageSrc}
+                    alt={flowchart.title}
+                    className="w-full h-auto rounded-xl shadow-md border border-gray-100 mb-10 bg-white"
                 />
             )}
 
