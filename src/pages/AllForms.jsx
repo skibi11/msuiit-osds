@@ -1,8 +1,7 @@
-
 import useGoogleSheet from '../hooks/useGoogleSheet'
 
 export default function AllForms() {
-    const { data: formsData, loading, error } = useGoogleSheet('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6690GqobcQRr7x9wGxxA0HQEbDwtx83so1LkbZzgYJ8sVIeRuEHK3beBkM5d4vweBC4MePCH6U_X9/pub?gid=0&single=true&output=csv')
+    const { formsData, loading, error } = useGoogleSheet()
 
     if (loading) {
         return (
@@ -20,14 +19,10 @@ export default function AllForms() {
         )
     }
 
-    // Deduplicate forms based on title to handle multiple category assignments
-    const uniqueForms = formsData
-        ? Array.from(new Map(
-            formsData
-                .filter(item => item.category !== 'footer_social')
-                .map(item => [item.title, item])
-        ).values())
-        : []
+    // Deduplicate forms based on title
+    const uniqueForms = Array.from(
+        new Map(formsData.map(item => [item.title, item])).values()
+    )
 
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -35,10 +30,10 @@ export default function AllForms() {
                 All Downloadable Forms
             </h1>
 
-            {uniqueForms && uniqueForms.length > 0 ? (
+            {uniqueForms.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {uniqueForms.map((form) => (
-                        <div key={form.id} className="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div key={form.id || form.title} className="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-6 hover:shadow-md transition-shadow">
                             <h2 className="text-lg font-bold mb-2 leading-tight text-primary">
                                 {form.title}
                             </h2>
