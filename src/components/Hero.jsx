@@ -25,7 +25,7 @@ export default function Hero() {
 
     return (
         <div className="relative isolate px-6 lg:px-8 z-40">
-            <div className="mx-auto max-w-2xl pt-24 pb-12 sm:pt-32 sm:pb-16 text-center">
+            <div className="mx-auto max-w-2xl pt-24 pb-12 sm:pt-24 sm:pb-16 text-center">
                 <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-6xl mb-8">
                     How can OSDS help you today?
                 </h1>
