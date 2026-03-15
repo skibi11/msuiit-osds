@@ -44,7 +44,7 @@ export default function About() {
                     <div className="lg:col-span-2 space-y-12">
 
                         {/* History Block */}
-                        <div className="bg-gray-50 p-8 rounded-2xl border-l-4 border-[#8a1538]">
+                        <div className="bg-white border border-gray-200 border-l-4 border-l-[#8a1538] rounded-2xl shadow-sm p-8">
                             <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">History and Rationale</h2>
                             <p className="text-gray-700 leading-relaxed text-lg">
                                 The Department of Student Affairs (DSA) has been handling numerous programs and
@@ -103,10 +103,45 @@ export default function About() {
                 </div>
             )}
 
-            {/* Staff and Directory Tab */}
+            {/* Staff and Directory Tab — Team Directory */}
             {activeTab === 'staff' && (
-                <div className="py-12 text-center text-gray-500">
-                    Staff and Directory content coming soon.
+                <div className="space-y-10">
+                    {/* Unified Team Introduction card */}
+                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-10 mb-12 flex flex-col md:flex-row items-center gap-10">
+                        <div className="flex flex-col text-center md:text-left">
+                            <h3 className="text-2xl font-extrabold text-[#8a1538]">Phyllis Marie S. Teanco</h3>
+                            <p className="text-gray-500 font-medium tracking-wide uppercase text-sm mt-2">Director, OSDS</p>
+                        </div>
+                        <div className="hidden md:block w-px h-24 bg-gray-300 flex-shrink-0" aria-hidden="true" />
+                        <div className="flex-1 text-center md:text-left">
+                            <h2 className="text-xl font-bold text-gray-900 mb-2">Meet the Team</h2>
+                            <p className="text-gray-600 leading-relaxed">
+                                The OSDS team supports student development through programs, permits, finances, and communications.
+                                Get to know the people behind the office who keep student services running smoothly.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Administrative Staff — 2-column list with maroon accent bar */}
+                    <div>
+                        <h2 className="text-2xl font-bold text-[#1a1a1a] mb-6">Administrative Staff</h2>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {[
+                                { name: 'Alyha Zshiazny B. Lantud', role: 'Social Media Manager' },
+                                { name: 'Jeinalisa L. Bayadog, LPT', role: 'Financial Assistant' },
+                                { name: 'Al-Musa M. Musa', role: 'Liquidations Officer' },
+                                { name: 'Elmar B. Albios', role: 'Permits Officer' },
+                            ].map((person, i) => (
+                                <div
+                                    key={i}
+                                    className="bg-white rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-[#8a1538] p-5 pl-6"
+                                >
+                                    <h3 className="text-gray-900 font-bold text-lg">{person.name}</h3>
+                                    <p className="text-[#8a1538] font-medium text-sm mt-1">{person.role}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             )}
 
