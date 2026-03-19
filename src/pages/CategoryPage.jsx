@@ -10,9 +10,11 @@ export default function CategoryPage() {
     const [activeFilter, setActiveFilter] = useState("All")
 
     // Format the category name for display (e.g. "in-campus" -> "In-Campus")
-    const categoryName = slug
-        ? slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
-        : 'Category'
+    const categoryName = slug === 'organizations' 
+        ? 'Student Organizations' 
+        : slug
+            ? slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+            : 'Category'
 
     // Filter forms based on the category slug
     const forms = formsData ? formsData.filter(form => form.category === slug) : []

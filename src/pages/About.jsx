@@ -45,7 +45,7 @@ export default function About() {
 
                         {/* History Block */}
                         <div className="bg-white border border-gray-200 border-l-4 border-l-[#8a1538] rounded-2xl shadow-sm p-8">
-                            <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">History and Rationale</h2>
+                            <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">Office Overview</h2>
                             <p className="text-gray-700 leading-relaxed text-lg">
                                 The Department of Student Affairs (DSA) has been handling numerous programs and
                                 activities to enhance student welfare at the Mindanao State University-Iligan
@@ -129,8 +129,8 @@ export default function About() {
                             {[
                                 { name: 'Alyha Zshiazny B. Lantud', role: 'Social Media Manager' },
                                 { name: 'Jeinalisa L. Bayadog, LPT', role: 'Financial Assistant' },
-                                { name: 'Al-Musa M. Musa', role: 'Liquidations Officer' },
-                                { name: 'Elmar B. Albios', role: 'Permits Officer' },
+                                { name: 'Al-Musa M. Musa', role: 'Administrative Staff' },
+                                { name: 'Elmar B. Albios', role: 'Administrative Assistant' },
                             ].map((person, i) => (
                                 <div
                                     key={i}
