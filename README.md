@@ -1,50 +1,50 @@
-# LeukoLook | AI-Powered Leukocoria Detection
+# OSDS Student Portal | Serverless University Gateway
 
-An AI-powered web and mobile application designed to analyze pediatric eye photos and detect early signs of leukocoria, serving as an accessible screening tool for parents and guardians. 
+A centralized, highly responsive digital gateway architected for the Office of Student Development Services (OSDS) at Mindanao State University - Iligan Institute of Technology.
 
-![Vue.js](https://img.shields.io/badge/Vue.js-35495E?logo=vue.js&logoColor=4FC08D)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
-![Django](https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white)
-![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21E?logo=huggingface&logoColor=000)
+![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?logo=google-cloud&logoColor=white)
+![Serverless](https://img.shields.io/badge/Architecture-Serverless-FF9900)
 
 ## 📖 Overview
-Early detection of leukocoria (an abnormal white reflection from the retina) is critical for pediatric eye health. LeukoLook bridges the gap between complex medical AI models and everyday accessibility. The application provides a dark-mode, intuitive interface that allows users to either upload existing gallery photos or use their device's camera for real-time analysis using custom-trained TensorFlow models.
+The OSDS Student Portal was engineered to streamline university administrative processes by providing a clean, accessible interface for students to navigate policies, download forms, and request services. Instead of relying on a traditional, heavy relational database, this project utilizes a modern serverless approach to maximize speed and reduce hosting overhead.
 
-*Note: This project was developed as an academic deliverable for the College of Computer Studies at Mindanao State University - Iligan Institute of Technology.*
+*Note: This system was developed as part of an official On-the-Job Training (OJT) deployment for the MSU-IIT Office of Student Development Services.*
 
 ## 🏗️ System Architecture & Tech Stack
 
-The application is structured using a decoupled architecture to ensure seamless communication between the client interface, the backend routing, and the heavy machine-learning inference layer.
+To ensure rapid deployment and easy hand-off to non-technical university administrators, the application decouples a modern frontend from a familiar, lightweight backend:
 
-* **Frontend Client:** Built with **Vue 3** and **TypeScript** (via Vite) for a highly responsive, type-safe user interface.
-* **Backend API:** Engineered with **Django REST Framework (DRF)** and **FastAPI** to handle complex routing, image preprocessing, and secure data transfer.
-* **AI / Machine Learning:** Custom models developed using **TensorFlow/Keras** and **Roboflow**. 
-* **Hosting & Deployment:** The frontend and backend are deployed via **Vercel** and **Render**, while the AI inference model is securely hosted on **Hugging Face Spaces** for optimized computational performance.
+* **Frontend Client:** Built with **React.js** and styled with **Tailwind CSS** for a highly responsive, minimalist user interface that performs exceptionally well across mobile and desktop environments.
+* **Serverless Backend (Headless CMS):** Cleverly leverages the **Google Sheets API** and **Google Drive API** as a lightweight, serverless database and file-hosting solution. This allows university staff to update portal content (like announcements or downloadable PDFs) simply by editing a Google Sheet, completely bypassing the need for a custom admin dashboard.
+* **State Management & Data Fetching:** Optimized asynchronous data fetching to parse Google Sheets JSON data into dynamic UI components with minimal latency.
 
 ## 👨‍💻 My Contributions
 
-As a Core Developer on this multidisciplinary academic team, my specific architectural responsibilities included:
-1.  **Frontend Engineering:** Architecting and building the entire Vue 3 and TypeScript client-side interface, focusing on camera integration, file-handling UX, and responsive design.
-2.  **Backend Logic:** Developing the core routing and data-handling logic within the Django application to bridge the user interface with the machine learning model.
-3.  **Model Deployment:** Managing the infrastructure to extract the TensorFlow model and successfully host it on Hugging Face Spaces to expose a reliable inference endpoint.
+As the Full-Stack Developer on this project, my responsibilities included:
+1. **UI/UX Engineering:** Designing and implementing the front-end search interfaces and responsive layout system using React and Tailwind.
+2. **API Integration:** Architecting the connection between the React client and the Google Workspace APIs, ensuring secure and efficient data retrieval.
+3. **Data Structuring:** Designing the schema within Google Sheets to act as a reliable, queryable database for the frontend components.
 
 ## 🚀 Local Development Setup
 
-To run this project locally, you will need Node.js and Python installed on your machine.
+To run this project locally, you will need Node.js installed and access to the necessary Google Cloud API credentials.
 
-### 1. Frontend Setup (Vue 3)
+### 1. Installation
 ```bash
-cd frontend
+git clone https://github.com/skibi11/msuiit-osds.git
+cd msuiit-osds
 npm install
-npm run dev
 ```
 
-### 2. Backend Setup (Django)
+### 2. Environment Variables
 ```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-pip install -r requirements.txt
-python manage.py runserver
+REACT_APP_GOOGLE_API_KEY=your_api_key
+REACT_APP_SPREADSHEET_ID=your_target_sheet_id
+```
+
+### 3. Start the Development Server
+```bash
+npm start
 ```
