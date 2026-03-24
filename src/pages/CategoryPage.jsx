@@ -235,14 +235,14 @@ export default function CategoryPage() {
                             <div
                                 key={org.id}
                                 onClick={() => setSelectedOrg(org)}
-                                className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 flex flex-col items-center text-center hover:border-[#8a1538] hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer h-full"
+                                className="bg-white border border-gray-200 shadow-sm rounded-2xl p-4 sm:p-3 flex flex-col items-center text-center hover:border-[#8a1538] hover:-translate-y-1 hover:shadow-md transition-all cursor-pointer h-full justify-center"
                             >
-                                {/* Compact Tile Logo */}
-                                <div className="w-20 h-20 bg-gray-50 rounded-xl mb-4 flex items-center justify-center border border-gray-100 shrink-0 overflow-hidden">
+                                {/* Adjusted Tile Logo */}
+                                <div className="w-28 h-28 bg-gray-50 rounded-xl mb-2 flex items-center justify-center border border-gray-100 shrink-0 overflow-hidden">
                                     {org.imageSrc ? (
-                                        <img src={org.imageSrc} alt={org.name} referrerPolicy="no-referrer" className="w-full h-full object-cover mix-blend-multiply" />
+                                        <img src={org.imageSrc} alt={org.name} referrerPolicy="no-referrer" className="w-full h-full object-contain mix-blend-multiply" />
                                     ) : (
-                                        <span className="text-3xl font-extrabold text-[#8a1538] uppercase">
+                                        <span className="text-4xl font-extrabold text-[#8a1538] uppercase">
                                             {org.name ? org.name.charAt(0) : '?'}
                                         </span>
                                     )}
