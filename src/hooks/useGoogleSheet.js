@@ -7,6 +7,7 @@ const TAB_URLS = {
     forms: `${BASE_URL}?gid=0&single=true&output=csv`,
     flowcharts: `${BASE_URL}?gid=390124480&single=true&output=csv`,
     socials: `${BASE_URL}?gid=1742116035&single=true&output=csv`,
+    organizations: `${BASE_URL}?gid=1534935566&single=true&output=csv`,
 }
 
 function parseCsv(url) {
@@ -14,6 +15,7 @@ function parseCsv(url) {
         Papa.parse(url, {
             download: true,
             header: true,
+            transformHeader: (h) => h.trim(), // This removes accidental spaces in "Description "
             skipEmptyLines: true,
             complete: (results) => resolve(results.data),
             error: (err) => reject(err),
@@ -21,17 +23,32 @@ function parseCsv(url) {
     })
 }
 
-// Convert a Google Drive share/view URL to a reliable thumbnail image URL
-function driveToDirectLink(url) {
-    if (!url) return ''
-    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/)
-    return match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w16383` : url
+// Convert a Google Drive share/view URL to a reliable binary image URL
+function getDirectDriveLink(url) {
+    if (!url || typeof url !== 'string') return '';
+    // Extract the Google Drive file ID
+    const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+    const id = idMatch ? idMatch[1] : '';
+
+    // If it's a valid ID, use the thumbnail endpoint (uc?export=view is blocked by Google Drive CORS policies on modern browsers)
+    if (id) {
+        return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+    }
+
+    // If it's just a raw direct image link (imgur, etc)
+    if (url.startsWith('http')) {
+        return url;
+    }
+
+    // Return empty so the frontend fallback (the first letter) correctly triggers
+    return '';
 }
 
 export default function useGoogleSheet() {
     const [formsData, setFormsData] = useState([])
     const [socialsData, setSocialsData] = useState([])
     const [flowchartsData, setFlowchartsData] = useState([])
+    const [organizationsData, setOrganizationsData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
@@ -41,8 +58,9 @@ export default function useGoogleSheet() {
             parseCsv(TAB_URLS.forms),
             parseCsv(TAB_URLS.socials),
             parseCsv(TAB_URLS.flowcharts),
+            parseCsv(TAB_URLS.organizations).catch(() => []), // Catch individual error if GID is invalid
         ])
-            .then(([rawForms, rawSocials, rawFlowcharts]) => {
+            .then(([rawForms, rawSocials, rawFlowcharts, rawOrganizations]) => {
                 // Map: Forms — (id, title, category, college, description, downloadLink)
                 setFormsData(
                     rawForms.map(row => ({
@@ -74,7 +92,24 @@ export default function useGoogleSheet() {
                         category: row['category'] || '',
                         description: row['description'] || '',
                         flowchartLink: row['flowchartLink'] || '',
-                        imageSrc: driveToDirectLink(row['flowchartLink'] || ''),
+                        imageSrc: getDirectDriveLink(row['flowchartLink'] || ''),
+                    }))
+                )
+
+                // Map: Organizations
+                setOrganizationsData(
+                    (rawOrganizations || []).map((row, index) => ({
+                        id: index,
+                        name: row['O&P Name'] || '',
+                        category: row['Category'] || '',
+                        // REVISION: Wrap the logo in the transformation function
+                        officialLogo: row['Official Logo'] || '',
+                        imageSrc: getDirectDriveLink(row['Official Logo'] || ''),
+                        adviser: row['Adviser'] || '',
+                        president: row['President/Chair'] || '',
+                        // Ensure this matches the header 'Description' in your CSV exactly
+                        description: row['Description'] || '',
+                        contact: row['Email/Contact Number'] || '',
                     }))
                 )
 
@@ -86,5 +121,5 @@ export default function useGoogleSheet() {
             })
     }, [])
 
-    return { formsData, socialsData, flowchartsData, loading, error }
+    return { formsData, socialsData, flowchartsData, organizationsData, loading, error }
 }
