@@ -47,7 +47,7 @@ export default function CategoryPage() {
     const flowchart = flowchartsData.find(fc => fc.category === slug && fc.imageSrc)
 
     const filterOptions = slug === 'organizations'
-        ? ["Forms", "Service & Volunteerism", "Student Publication", "Academic & Professional", "Religious & Faith-Based", "Advocacy & Special Interest", "Sports & Recreation"]
+        ? ["Forms", "Student Publication", "Service & Advocacy", "Religious & Faith-Based", "Academic & Professional", "Sports & Recreation"]
         : ["All", "KASAMA", "Student Councils", "Societies"];
 
     // Programs and Services is fully static — return immediately, no data needed
