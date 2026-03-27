@@ -44,82 +44,126 @@ function getDirectDriveLink(url) {
     return '';
 }
 
+const CACHE_KEY = 'osds_portal_sheet_data';
+const CACHE_EXPIRY = 5 * 60 * 1000; // 5 minutes
+
+let memoryCache = null;
+let globalFetchPromise = null;
+
 export default function useGoogleSheet() {
-    const [formsData, setFormsData] = useState([])
-    const [socialsData, setSocialsData] = useState([])
-    const [flowchartsData, setFlowchartsData] = useState([])
-    const [organizationsData, setOrganizationsData] = useState([])
-    const [loading, setLoading] = useState(true)
+    // 1. Synchronous initial cache check
+    let initialData = null;
+
+    if (memoryCache) {
+        initialData = memoryCache;
+    } else if (typeof window !== 'undefined') {
+        try {
+            const sessionDataString = sessionStorage.getItem(CACHE_KEY);
+            if (sessionDataString) {
+                const sessionData = JSON.parse(sessionDataString);
+                // Check if the cache is still valid
+                if (Date.now() - sessionData.timestamp < CACHE_EXPIRY) {
+                    memoryCache = sessionData.data;
+                    initialData = sessionData.data;
+                }
+            }
+        } catch (err) {
+            console.warn('Failed to parse session storage cache', err);
+        }
+    }
+
+    const [formsData, setFormsData] = useState(initialData ? initialData.formsData : [])
+    const [socialsData, setSocialsData] = useState(initialData ? initialData.socialsData : [])
+    const [flowchartsData, setFlowchartsData] = useState(initialData ? initialData.flowchartsData : [])
+    const [organizationsData, setOrganizationsData] = useState(initialData ? initialData.organizationsData : [])
+    const [loading, setLoading] = useState(!initialData)
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        setLoading(true)
-        Promise.all([
-            parseCsv(TAB_URLS.forms),
-            parseCsv(TAB_URLS.socials),
-            parseCsv(TAB_URLS.flowcharts),
-            parseCsv(TAB_URLS.organizations).catch(() => []), // Catch individual error if GID is invalid
-        ])
-            .then(([rawForms, rawSocials, rawFlowcharts, rawOrganizations]) => {
-                // Map: Forms — (id, title, category, college, description, downloadLink)
-                setFormsData(
-                    rawForms.map(row => ({
+        // If we already have data synchronously, skip fetch
+        if (initialData) return;
+
+        // If no fetch is currently happening, start one
+        if (!globalFetchPromise) {
+            globalFetchPromise = Promise.all([
+                parseCsv(TAB_URLS.forms),
+                parseCsv(TAB_URLS.socials),
+                parseCsv(TAB_URLS.flowcharts),
+                parseCsv(TAB_URLS.organizations).catch(() => []), // Catch individual error if GID is invalid
+            ]).then(([rawForms, rawSocials, rawFlowcharts, rawOrganizations]) => {
+                const data = {
+                    formsData: rawForms.map(row => ({
                         id: row['id'] || '',
                         title: row['title'] || '',
                         category: row['category'] || '',
                         college: row['college'] || '',
                         description: row['description'] || '',
                         downloadLink: row['downloadLink'] || '',
-                    }))
-                )
-
-                // Map: Socials — (id, code←title, category, fullName←description, fbUrl←link)
-                setSocialsData(
-                    rawSocials.map(row => ({
+                    })),
+                    socialsData: rawSocials.map(row => ({
                         id: row['id'] || '',
                         code: row['title'] || '',
                         category: row['category'] || '',
                         fullName: row['description'] || '',
                         fbUrl: row['link'] || '',
-                    }))
-                )
-
-                // Map: Flowcharts — (id, title, category, description, flowchartLink, imageSrc)
-                setFlowchartsData(
-                    rawFlowcharts.map(row => ({
+                    })),
+                    flowchartsData: rawFlowcharts.map(row => ({
                         id: row['id'] || '',
                         title: row['title'] || '',
                         category: row['category'] || '',
                         description: row['description'] || '',
                         flowchartLink: row['flowchartLink'] || '',
                         imageSrc: getDirectDriveLink(row['flowchartLink'] || ''),
+                    })),
+                    organizationsData: (rawOrganizations || []).map((row, index) => ({
+                        id: row['id'] || '',
+                        name: row['student organization'] || '',
+                        category: row['category'] || '',
+                        officialLogo: row['official logo'] || '',
+                        imageSrc: getDirectDriveLink(row['official logo'] || ''),
+                        adviser: row['adviser'] || '',
+                        president: row['president/chair'] || '',
+                        description: row['description'] || '',
+                        contact: row['email / contact number'] || '',
                     }))
-                )
+                };
 
-                // Map: Organizations
-                setOrganizationsData(
-                    (rawOrganizations || []).map((row, index) => ({
-                        id: index,
-                        name: row['O&P Name'] || '',
-                        category: row['Category'] || '',
-                        // REVISION: Wrap the logo in the transformation function
-                        officialLogo: row['Official Logo'] || '',
-                        imageSrc: getDirectDriveLink(row['Official Logo'] || ''),
-                        adviser: row['Adviser'] || '',
-                        president: row['President/Chair'] || '',
-                        // Ensure this matches the header 'Description' in your CSV exactly
-                        description: row['Description'] || '',
-                        contact: row['Email/Contact Number'] || '',
-                    }))
-                )
+                // Save to caches
+                memoryCache = data;
+                if (typeof window !== 'undefined') {
+                    try {
+                        sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+                            timestamp: Date.now(),
+                            data: data
+                        }));
+                    } catch (err) {
+                        console.warn('Failed to save to session storage', err);
+                    }
+                }
 
-                setLoading(false)
+                return data;
+            }).finally(() => {
+                // Clear the promise when done so future fetches (after cache expiry) work again
+                globalFetchPromise = null;
+            });
+        }
+
+        // Wait for the active promise
+        setLoading(true);
+        globalFetchPromise
+            .then(data => {
+                setFormsData(data.formsData);
+                setSocialsData(data.socialsData);
+                setFlowchartsData(data.flowchartsData);
+                setOrganizationsData(data.organizationsData);
+                setLoading(false);
             })
             .catch(err => {
-                setError(err)
-                setLoading(false)
-            })
-    }, [])
+                setError(err);
+                setLoading(false);
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []) // Run once on mount
 
     return { formsData, socialsData, flowchartsData, organizationsData, loading, error }
 }

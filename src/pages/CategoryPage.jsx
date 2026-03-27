@@ -40,15 +40,15 @@ export default function CategoryPage() {
     const filteredOrganizations = organizationsData ? organizationsData.filter(org => {
         if (slug !== 'organizations') return false;
         if (activeFilter === 'Forms') return false;
-        return org.category && org.category.trim() === activeFilter;
+        return org.category === activeFilter;
     }) : [];
 
     // Find the flowchart for the current category from the Flowcharts tab
     const flowchart = flowchartsData.find(fc => fc.category === slug && fc.imageSrc)
 
-    const filterOptions = slug === 'organizations'
-        ? ["Forms", "Student Publication", "Service & Advocacy", "Religious & Faith-Based", "Academic & Professional", "Sports & Recreation"]
-        : ["All", "KASAMA", "Student Councils", "Societies"];
+    const filterOptions = [
+        "Forms", "Student Council & Society ", "Student Publication", "Socio-Civic", "Religious & Faith-Based", "Academic & Professional", "Sports & Recreation"
+    ];
 
     // Programs and Services is fully static — return immediately, no data needed
     if (slug === 'programs-and-services') {
