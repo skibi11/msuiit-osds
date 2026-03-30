@@ -7,9 +7,12 @@ import About from './pages/About'
 import Policies from './pages/Policies'
 import Footer from './components/Footer'
 
+import ScrollToTop from './components/ScrollToTop'
+
 function App() {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <div className="min-h-screen bg-background text-text font-sans">
                 <Navbar />
                 <Routes>

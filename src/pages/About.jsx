@@ -107,12 +107,12 @@ export default function About() {
             {activeTab === 'staff' && (
                 <div className="space-y-10">
                     {/* Unified Team Introduction card */}
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-10 mb-12 flex flex-col md:flex-row items-center gap-10">
+                    <div className="bg-white border border-gray-100 border-l-4 border-l-[#8a1538] rounded-2xl shadow-md p-10 mb-12 flex flex-col md:flex-row items-center gap-10">
                         <div className="flex flex-col text-center md:text-left">
                             <h3 className="text-2xl font-extrabold text-[#8a1538]">Phyllis Marie S. Teanco</h3>
                             <p className="text-gray-500 font-medium tracking-wide uppercase text-sm mt-2">Director, OSDS</p>
                         </div>
-                        <div className="hidden md:block w-px h-24 bg-gray-300 flex-shrink-0" aria-hidden="true" />
+                        <div className="hidden md:block w-px h-24 bg-gray-100 flex-shrink-0" aria-hidden="true" />
                         <div className="flex-1 text-center md:text-left">
                             <h2 className="text-xl font-bold text-gray-900 mb-2">Meet the Team</h2>
                             <p className="text-gray-600 leading-relaxed">
@@ -127,14 +127,14 @@ export default function About() {
                         <h2 className="text-2xl font-bold text-[#1a1a1a] mb-6">Administrative Staff</h2>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {[
-                                { name: 'Alyha Zshiazny B. Lantud', role: 'Social Media Manager' },
-                                { name: 'Jeinalisa L. Bayadog, LPT', role: 'Financial Assistant' },
                                 { name: 'Al-Musa M. Musa', role: 'Administrative Staff' },
                                 { name: 'Elmar B. Albios', role: 'Administrative Assistant' },
+                                { name: 'Alyha Zshiazny B. Lantud', role: 'Social Media Manager' },
+                                { name: 'Jeinalisa L. Bayadog, LPT', role: 'Financial Assistant' },
                             ].map((person, i) => (
                                 <div
                                     key={i}
-                                    className="bg-white rounded-xl border border-gray-100 shadow-sm border-l-4 border-l-[#8a1538] p-5 pl-6"
+                                    className="bg-white rounded-xl border border-gray-100 shadow-sm border-l-2 border-l-[#8a1538] p-5 pl-6"
                                 >
                                     <h3 className="text-gray-900 font-bold text-lg">{person.name}</h3>
                                     <p className="text-[#8a1538] font-medium text-sm mt-1">{person.role}</p>

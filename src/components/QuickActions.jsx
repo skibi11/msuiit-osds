@@ -9,13 +9,13 @@ import { Link } from 'react-router-dom'
 
 export default function QuickActions() {
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-5 pb-12">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
                 {actions.map((action) => (
                     <Link
                         key={action.title}
                         to={action.path}
-                        className="group bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col justify-center h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                        className="group bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col justify-center items-center text-center sm:items-start sm:text-left h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                     >
                         <h3 className="text-lg font-bold text-[#8a1538] transition-colors duration-300 group-hover:text-[#fdb813] mb-1">
                             {action.title}

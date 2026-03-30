@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import useGoogleSheet from '../hooks/useGoogleSheet'
 
@@ -8,6 +8,27 @@ export default function CategoryPage() {
     const { formsData, flowchartsData, organizationsData, loading, error } = useGoogleSheet()
     const [activeFilter, setActiveFilter] = useState(slug === 'organizations' ? 'Forms' : 'All')
     const [selectedOrg, setSelectedOrg] = useState(null)
+
+    // Scroll Animation State & Ref for Flowchart
+    const flowchartRef = useRef(null)
+    const [isFlowchartVisible, setIsFlowchartVisible] = useState(false)
+
+    useEffect(() => {
+        setIsFlowchartVisible(false) // Reset on category change
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setIsFlowchartVisible(true)
+                observer.disconnect()
+            }
+        }, { threshold: 0.15 })
+
+        if (flowchartRef.current) {
+            observer.observe(flowchartRef.current)
+        }
+
+        return () => observer.disconnect()
+    }, [slug, flowchartsData])
 
     // Lock body scrolling when the modal is open
     useEffect(() => {
@@ -200,12 +221,18 @@ export default function CategoryPage() {
             </h1>
 
             {flowchart && flowchart.imageSrc && (
-                <img
-                    src={flowchart.imageSrc}
-                    alt={flowchart.title || 'Flowchart'}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-auto object-contain rounded-xl shadow-sm mb-6"
-                />
+                <div
+                    ref={flowchartRef}
+                    className={`transition-all duration-1000 ease-out transform ${isFlowchartVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                        }`}
+                >
+                    <img
+                        src={flowchart.imageSrc}
+                        alt={flowchart.title || 'Flowchart'}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-auto object-contain rounded-xl shadow-md mb-8"
+                    />
+                </div>
             )}
 
             {/* Filter Buttons - Only for Organizations */}
@@ -272,14 +299,16 @@ export default function CategoryPage() {
                                 <p className="text-sm text-gray-500 mb-4 h-12 overflow-hidden">
                                     {form.description}
                                 </p>
-                                <a
-                                    href={form.downloadLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors w-full sm:w-auto"
-                                >
-                                    View Form
-                                </a>
+                                <div className="mt-2 flex justify-center">
+                                    <a
+                                        href={form.downloadLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center rounded-md bg-secondary px-8 py-2 text-sm font-medium text-white hover:bg-opacity-90 transition-colors w-full sm:w-auto"
+                                    >
+                                        View Form
+                                    </a>
+                                </div>
                             </div>
                         ))}
                     </div>
