@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useGoogleSheet from '../hooks/useGoogleSheet'
 
@@ -9,25 +9,13 @@ export default function CategoryPage() {
     const [activeFilter, setActiveFilter] = useState(slug === 'organizations' ? 'Forms' : 'All')
     const [selectedOrg, setSelectedOrg] = useState(null)
 
-    // Scroll Animation State & Ref for Flowchart
-    const flowchartRef = useRef(null)
+    // Mount Animation for Flowchart
     const [isFlowchartVisible, setIsFlowchartVisible] = useState(false)
 
     useEffect(() => {
         setIsFlowchartVisible(false) // Reset on category change
-
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                setIsFlowchartVisible(true)
-                observer.disconnect()
-            }
-        }, { threshold: 0.15 })
-
-        if (flowchartRef.current) {
-            observer.observe(flowchartRef.current)
-        }
-
-        return () => observer.disconnect()
+        const timer = setTimeout(() => setIsFlowchartVisible(true), 80)
+        return () => clearTimeout(timer)
     }, [slug, flowchartsData])
 
     // Lock body scrolling when the modal is open
@@ -222,7 +210,6 @@ export default function CategoryPage() {
 
             {flowchart && flowchart.imageSrc && (
                 <div
-                    ref={flowchartRef}
                     className={`transition-all duration-1000 ease-out transform ${isFlowchartVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                         }`}
                 >
