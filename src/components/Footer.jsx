@@ -43,7 +43,11 @@ export default function Footer() {
                             <li><a href="/" className="hover:text-primary transition-colors">Home</a></li>
                             <li><a href="/about" className="hover:text-primary transition-colors">About</a></li>
                             <li><a href="/forms" className="hover:text-primary transition-colors">Forms</a></li>
-                            <li><a href="/policies" className="hover:text-primary transition-colors">Policies</a></li>
+                            <li>
+                                <a href="https://drive.google.com/file/d/1oeuGMLASUSyMWneUhbyFj_It8lfF3NcF/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                                    Handbook
+                                </a>
+                            </li>
                             <li>
                                 <a href="https://www.facebook.com/MSUIITPHOSDS" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
                                     OSDS Facebook Page

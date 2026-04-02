@@ -19,16 +19,39 @@ export default function AllForms() {
         )
     }
 
-    // Deduplicate forms based on title
+    // Deduplicate forms based on title, and skip entries with no title
     const uniqueForms = Array.from(
-        new Map(formsData.map(item => [item.title, item])).values()
+        new Map(
+            formsData
+                .filter(item => item.title && item.title.trim() !== '')
+                .map(item => [item.title, item])
+        ).values()
     )
 
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+            {/* Feedback Form Section */}
+            <section className="mb-10 rounded-xl bg-primary/5 border border-primary/20 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 className="text-xl font-bold text-primary mb-1">Student Feedback Form</h2>
+                    <p className="text-sm text-gray-600">
+                        We value your feedback! Share your thoughts, concerns, or suggestions about OSDS services.
+                    </p>
+                </div>
+                <a
+                    href="https://forms.google.com/your-feedback-form-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-opacity-90 transition-colors"
+                >
+                    Fill Out Feedback Form →
+                </a>
+            </section>
+
             <h1 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">
                 All Downloadable Forms
             </h1>
+
 
             {uniqueForms.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

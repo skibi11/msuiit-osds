@@ -31,7 +31,7 @@ export default function Hero() {
                 style={{ backgroundImage: "url('/images/OSDSbuilding1.jpg')" }}
             />
             {/* Neutral Background Overlay for text readability */}
-            <div className="absolute inset-0 bg-black/50 -z-10" />
+            <div className="absolute inset-0 bg-[#8a1538]/25 -z-10" />
 
             <div className="relative mx-auto max-w-2xl pt-24 pb-12 sm:pt-24 sm:pb-20 text-center z-10 w-full">
                 <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl mb-8">
@@ -42,7 +42,7 @@ export default function Hero() {
                         type="text"
                         value={searchTerm}
                         onChange={handleSearch}
-                        className="block w-full rounded-full border-0 py-4 pl-6 pr-4 bg-white/20 backdrop-blur-sm text-white shadow-lg ring-2 ring-inset ring-white/70 placeholder:text-white/70 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6 transition-shadow hover:shadow-xl hover:bg-white/25"
+                        className="block w-full rounded-full border-0 py-4 pl-6 pr-4 bg-white/30 backdrop-blur-sm text-white shadow-lg ring-2 ring-inset ring-white/70 placeholder:text-white/70 focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6 transition-shadow hover:shadow-xl hover:bg-white/40"
                         placeholder="Search forms, essential services, or FAQs..."
                     />
 

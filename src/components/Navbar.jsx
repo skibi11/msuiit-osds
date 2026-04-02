@@ -15,7 +15,7 @@ export default function Navbar() {
                     <Link to="/" className="text-sm font-medium text-text hover:text-primary transition-colors">Home</Link>
                     <Link to="/about" className="text-sm font-medium text-text hover:text-primary transition-colors">About</Link>
                     <Link to="/forms" className="text-sm font-medium text-text hover:text-primary transition-colors">Forms</Link>
-                    <Link to="/policies" className="text-sm font-medium text-text hover:text-primary transition-colors">Policies</Link>
+                    <a href="https://drive.google.com/file/d/1oeuGMLASUSyMWneUhbyFj_It8lfF3NcF/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-text hover:text-primary transition-colors">Handbook</a>
                 </div>
             </div>
         </nav>
