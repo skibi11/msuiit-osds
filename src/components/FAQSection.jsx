@@ -27,7 +27,7 @@ export default function FAQSection() {
     }
 
     return (
-        <div className="mx-auto max-w-3xl px-6 pb-24">
+        <div id="faqs" className="mx-auto max-w-3xl px-6 pb-24">
             <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900 mb-8 text-center">
                 Frequently Asked Questions
             </h2>
