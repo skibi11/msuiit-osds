@@ -50,7 +50,7 @@ export default function Footer() {
                             </li>
                             <li>
                                 <a href="https://www.facebook.com/MSUIITPHOSDS" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                                    OSDS Facebook Page
+                                    Facebook
                                 </a>
                             </li>
                         </ul>
