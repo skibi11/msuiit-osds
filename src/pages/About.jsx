@@ -47,12 +47,13 @@ export default function About() {
                         <div className="bg-white border border-gray-200 border-l-4 border-l-[#8a1538] rounded-2xl shadow-sm p-8">
                             <h2 className="text-2xl font-bold text-[#1a1a1a] mb-4">Office Overview</h2>
                             <p className="text-gray-700 leading-relaxed text-lg">
-                                The Department of Student Affairs (DSA) has been handling numerous programs and
-                                activities to enhance student welfare at the Mindanao State University-Iligan
-                                Institute of Technology (MSU-IIT) since 1968. To address the growing needs of the
-                                student body, the office was officially renamed the Office of Student Development
-                                Services (OSDS) and placed under the Office of the Vice Chancellor for Student
-                                Services (OVCSS) through Board Resolution Number 50, Series of 2019.
+                                The Office of Student Development Services (OSDS) serves as the central hub for student welfare, engagement, and holistic development. It is committed to fostering a supportive, inclusive, and student-centered environment that empowers learners to succeed academically, socially, and personally.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed text-lg mt-4">
+                                OSDS provides a wide range of programs and services designed to enrich the student experience. These include student organization accreditation and support, leadership development programs, student discipline and conduct management, and supervision of student-led activities and events. OSDS also facilitates co-curricular and extracurricular engagement to promote values formation, civic responsibility, and lifelong learning.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed text-lg mt-4">
+                                Through its services, OSDS ensures that students are guided, supported, and equipped to become competent, responsible, and future-ready graduates.
                             </p>
                         </div>
 
