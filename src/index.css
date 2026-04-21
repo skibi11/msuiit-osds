@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 16px;
+    /* Default for standard screens */
+  }
+
+  @media (min-width: 1440px) {
+
+    /* Only triggers on larger desktop monitors */
+    html {
+      /* Seamless transition math */
+      font-size: clamp(16px, 1.11vw, 24px);
+    }
+  }
+
   body {
     @apply bg-background text-text font-sans antialiased;
   }

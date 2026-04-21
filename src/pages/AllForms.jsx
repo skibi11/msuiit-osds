@@ -1,7 +1,11 @@
 import useGoogleSheet from '../hooks/useGoogleSheet'
 
 export default function AllForms() {
-    const { formsData, loading, error } = useGoogleSheet()
+    const { formsData, flowchartsData, loading, error } = useGoogleSheet()
+
+    // Pull the feedback form link from the Flowcharts sheet.
+    // Add a row with category "feedback-form" in your Flowcharts sheet to set this link.
+    const feedbackFormUrl = flowchartsData.find(fc => fc.category === 'feedback-form')?.flowchartLink || '#'
 
     if (loading) {
         return (
@@ -39,7 +43,7 @@ export default function AllForms() {
                     </p>
                 </div>
                 <a
-                    href="https://forms.google.com/feedback-form-link"
+                    href={feedbackFormUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="shrink-0 inline-flex items-center justify-center rounded-md bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-opacity-90 transition-colors"
