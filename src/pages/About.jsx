@@ -85,11 +85,11 @@ export default function About() {
                         <div className="p-6 text-center">
                             <img
                                 src="/images/director.jpg"
-                                alt="Assoc. Prof. Phyllis Marie Teanco"
+                                alt="Phyllis Marie Teanco"
                                 className="w-full h-80 object-cover object-top rounded-xl mb-6 border-4 border-white shadow-md ring-1 ring-gray-200"
                             />
                             <h3 className="text-xl font-bold text-[#1a1a1a] leading-tight">
-                                Assoc. Prof. Phyllis Marie Teanco
+                                Phyllis Marie Teanco
                             </h3>
                             <p className="text-[#8a1538] font-medium mt-1">Director, OSDS</p>
 
@@ -132,7 +132,6 @@ export default function About() {
                                 { name: 'Elmar B. Albios', role: 'Administrative Assistant' },
                                 { name: 'Faruzaima M. Esmail', role: 'Administrative Assistant' },
                                 { name: 'Alyha Zshiazny B. Lantud', role: 'Social Media Manager' },
-                                { name: 'Jeinalisa L. Bayadog', role: 'Financial Assistant' },
                             ].map((person, i) => (
                                 <div
                                     key={i}
