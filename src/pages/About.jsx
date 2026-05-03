@@ -126,7 +126,7 @@ export default function About() {
                     {/* Administrative Staff — 2-column list with maroon accent bar */}
                     <div>
                         <h2 className="text-2xl font-bold text-[#1a1a1a] mb-6">Administrative Staff</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
                                 { name: 'Al-Musa M. Musa', role: 'Administrative Staff' },
                                 { name: 'Elmar B. Albios', role: 'Administrative Assistant' },
