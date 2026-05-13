@@ -83,11 +83,13 @@ export default function About() {
                     {/* Right Column — Director Sidebar */}
                     <div className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
                         <div className="p-6 text-center">
-                            <img
-                                src="/images/director.jpg"
-                                alt="Phyllis Marie Teanco"
-                                className="w-full h-80 object-cover object-top rounded-xl mb-6 border-4 border-white shadow-md ring-1 ring-gray-200"
-                            />
+                            <div className="w-full aspect-[3/4] rounded-xl mb-6 overflow-hidden border-4 border-white shadow-md ring-1 ring-gray-200">
+                                <img
+                                    src="/images/director.jpg"
+                                    alt="Phyllis Marie Teanco"
+                                    className="w-full h-full object-cover object-top"
+                                />
+                            </div>
                             <h3 className="text-xl font-bold text-[#1a1a1a] leading-tight">
                                 Phyllis Marie Teanco
                             </h3>
